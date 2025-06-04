@@ -1,0 +1,74 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+class Node {
+	int data;
+	Node next;
+
+	Node(int data) {
+		this.data = data;
+		this.next = null;
+	}
+}
+
+class LinkedList {
+	Node head;
+
+	void add(int data) {
+		Node newnode = new Node(data);
+		if (head == null) {
+			head = newnode;
+		} else {
+			Node temp = head;
+			while (temp.next != null) {
+				temp = temp.next;
+			}
+			temp.next = newnode;
+		}
+	}
+
+	void deleteNode(Node node) {
+		if (node == null || node.next == null) {
+			System.out.println("Cannot delete last or null node this way.");
+			return;
+		}
+	
+		node.data = node.next.data;
+		node.next = node.next.next;
+	}
+
+	Node findNode(int val) {
+		Node temp = head;
+		while (temp != null) {
+			if (temp.data == val) return temp;
+			temp = temp.next;
+		}
+		return null;
+	}
+
+	void print() {
+		Node temp = head;
+		while (temp != null) {
+			System.out.print(temp.data + " --> ");
+			temp = temp.next;
+		}
+		System.out.println("null");
+	}
+}
+
+public class Main {
+	public static void main(String[] args) {
+		LinkedList list = new LinkedList();
+		list.add(10);
+		list.add(20);
+		list.add(30);
+		list.add(40);
+		list.add(50);
+		list.print();
+		Node nodeToDelete = list.findNode(30);
+		list.deleteNode(nodeToDelete);
+
+		System.out.println("List after deleting node 30:");
+		list.print();
+	}
+}
