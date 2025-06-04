@@ -1,0 +1,196 @@
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node prev;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+        this.prev = null;
+        this.next = null;
+    }
+}
+
+class DoublyLinkedList {
+    Node head;
+
+    // Add node at the end
+    void add(int data) {
+        Node newnode = new Node(data);
+        if (head == null) {
+            head = newnode;
+            return;
+        }
+        Node temp = head;
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+        temp.next = newnode;
+        newnode.prev = temp;
+    }
+
+    // Insert at beginning
+    void insertAtBeginning(int data) {
+        Node newnode = new Node(data);
+        if (head == null) {
+            head = newnode;
+            return;
+        }
+        newnode.next = head;
+        head.prev = newnode;
+        head = newnode;
+    }
+
+    // Insert at end
+    void insertAtEnd(int data) {
+        add(data);
+    }
+
+    // Insert at 3rd position (assuming list has >= 2 nodes)
+    void insertAtThirdPosition(int data) {
+        if (head == null) {
+            System.out.println("List is empty, cannot insert at 3rd position.");
+            return;
+        }
+        Node newnode = new Node(data);
+        Node temp = head;
+
+        // Move to 2nd node
+        int count = 1;
+        while (count < 2 && temp.next != null) {
+            temp = temp.next;
+            count++;
+        }
+
+        newnode.next = temp.next;
+        if (temp.next != null) {
+            temp.next.prev = newnode;
+        }
+        temp.next = newnode;
+        newnode.prev = temp;
+    }
+
+    // Delete first node
+    void deleteFirstNode() {
+        if (head == null) return;
+        if (head.next == null) {
+            head = null;
+            return;
+        }
+        head = head.next;
+        head.prev = null;
+    }
+
+    // Delete last node
+    void deleteLastNode() {
+        if (head == null) return;
+        if (head.next == null) {
+            head = null;
+            return;
+        }
+        Node temp = head;
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+        // temp is last node
+        temp.prev.next = null;
+    }
+
+    // Delete node at position 3 
+    void deleteThirdNode() {
+        if (head == null) return;
+
+        Node temp = head;
+        int count = 1;
+        while (count < 3 && temp != null) {
+            temp = temp.next;
+            count++;
+        }
+
+        if (temp == null) {
+            System.out.println("No 3rd node to delete.");
+            return;
+        }
+        if (temp.prev != null) {
+            temp.prev.next = temp.next;
+        }
+        if (temp.next != null) {
+            temp.next.prev = temp.prev;
+        }
+    }
+
+    // Display list forward
+    void displayForward() {
+        Node temp = head;
+        System.out.print("List: ");
+        while (temp != null) {
+            System.out.print(temp.data + " <-> ");
+            temp = temp.next;
+        }
+        System.out.println("null");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        DoublyLinkedList dll = new DoublyLinkedList();
+
+        System.out.print("Enter number of nodes (N): ");
+        int n = sc.nextInt();
+
+        System.out.println("Enter " + n + " node values:");
+        for (int i = 0; i < n; i++) {
+            int val = sc.nextInt();
+            dll.add(val);
+        }
+
+        dll.displayForward();
+
+        // Insert node at beginning
+        System.out.println("Insert node 100 at beginning:");
+        dll.insertAtBeginning(100);
+        dll.displayForward();
+
+        // Insert node at end
+        System.out.println("Insert node 200 at end:");
+        dll.insertAtEnd(200);
+        dll.displayForward();
+
+        // Insert node at 3rd position 
+        if (dll.head != null && dll.head.next != null) {
+            System.out.println("Insert node 300 at 3rd position:");
+            dll.insertAtThirdPosition(300);
+            dll.displayForward();
+        } else {
+            System.out.println("Cannot insert at 3rd position, list is short.");
+        }
+
+        // Delete first node
+        System.out.println("Delete first node:");
+        dll.deleteFirstNode();
+        dll.displayForward();
+
+        // Delete last node
+        System.out.println("Delete last node:");
+        dll.deleteLastNode();
+        dll.displayForward();
+
+        // Delete 3rd node 
+        Node temp = dll.head;
+        int count = 0;
+        while (temp != null) {
+            count++;
+            temp = temp.next;
+        }
+        if (count >= 3) {
+            System.out.println("Delete 3rd node:");
+            dll.deleteThirdNode();
+            dll.displayForward();
+        } else {
+            System.out.println("No 3rd node to delete.");
+        }
+
+    }
+}
