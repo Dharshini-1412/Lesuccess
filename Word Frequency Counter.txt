@@ -1,0 +1,15 @@
+
+print "Enter a sentence: "
+def sentence = System.console().readLine()  
+
+def words = sentence.toLowerCase().split("\\s+")
+
+def wordCount = [:]
+words.each { word ->
+    wordCount[word] = wordCount.get(word, 0) + 1
+}
+
+println "\nWord Frequencies:"
+wordCount.each { word, count ->
+    println "${word} → ${count}"
+}

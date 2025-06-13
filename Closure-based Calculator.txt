@@ -1,0 +1,12 @@
+
+def calculate(a, b, operation) {
+    return operation(a, b)
+}
+
+def add = { x, y -> x + y }
+def subtract = { x, y -> x - y }
+def multiply = { x, y -> x * y }
+
+println "Addition: ${calculate(10, 5, add)}"        
+println "Subtraction: ${calculate(10, 5, subtract)}" 
+println "Multiplication: ${calculate(10, 5, multiply)}" 
