@@ -1,0 +1,18 @@
+class DynamicPerson {
+    String name
+    int age
+}
+
+// Create an instance
+def person = new DynamicPerson(name: "Dharshini", age: 21)
+
+// Modify existing property
+person.metaClass.name = "Riya"
+
+// Add a new property dynamically
+person.metaClass.city = "Chennai"
+
+// Print updated and dynamic properties
+println "Name: ${person.name}"     // Modified name
+println "Age: ${person.age}"       // Original age
+println "City: ${person.city}"     // Dynamically added

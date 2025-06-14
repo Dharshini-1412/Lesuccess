@@ -1,0 +1,17 @@
+try {
+    def x = 5
+    def y = 0
+    println "Result: " + (x / y)
+
+    def file = new File("myfile.txt")
+    println file.text
+}
+catch (ArithmeticException e) {
+    println "Cannot divide by zero."
+}
+catch (FileNotFoundException e) {
+    println "File not found."
+}
+finally {
+    println "Done."
+}

@@ -1,0 +1,9 @@
+class MyHandler {
+    def methodMissing(String name, args) {
+        println "Method ${name} is not defined"
+    }
+}
+
+def obj = new MyHandler()
+obj.sayHello()
+obj.unknownMethod(1, 2)

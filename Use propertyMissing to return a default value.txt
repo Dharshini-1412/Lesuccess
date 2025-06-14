@@ -1,0 +1,11 @@
+class MyHandler {
+    def propertyMissing(String name) {
+        return "undefined"
+    }
+}
+
+def obj = new MyHandler()
+
+println obj.name      
+println obj.age      
+println obj.location   
